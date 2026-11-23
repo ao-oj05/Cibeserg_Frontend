@@ -14,7 +14,7 @@ interface AuthFormProps {
 function isValidPassword(password: string): boolean {
   return (
     password.length >= 8 &&
-    password.length <= 128 &&
+    password.length <= 12 &&
     /[A-Z]/.test(password) &&
     /[a-z]/.test(password) &&
     /[0-9]/.test(password) &&
@@ -50,7 +50,7 @@ export function AuthForm({ mode }: AuthFormProps) {
 
     if (isRegister && !isValidPassword(password)) {
       setError(
-        "Usa entre 8 y 128 caracteres, con mayúscula, minúscula, número y carácter especial.",
+        "Usa entre 8 y 12 caracteres, con mayúscula, minúscula, número y carácter especial.",
       );
       return;
     }
@@ -151,7 +151,7 @@ export function AuthForm({ mode }: AuthFormProps) {
               <span>Contraseña</span>
               <input
                 autoComplete={isRegister ? "new-password" : "current-password"}
-                maxLength={128}
+                maxLength={isRegister ? 12 : 128}
                 minLength={isRegister ? 8 : 1}
                 name="password"
                 onChange={(event) => setPassword(event.target.value)}
@@ -164,13 +164,13 @@ export function AuthForm({ mode }: AuthFormProps) {
             {isRegister && (
               <>
                 <p className="password-hint">
-                  Mínimo 8 caracteres: mayúscula, minúscula, número y símbolo.
+                  Usa entre 8 y 12 caracteres: mayúscula, minúscula, número y símbolo.
                 </p>
                 <label className="form-field">
                   <span>Confirma tu contraseña</span>
                   <input
                     autoComplete="new-password"
-                    maxLength={128}
+                    maxLength={12}
                     minLength={8}
                     name="passwordConfirmation"
                     onChange={(event) => setPasswordConfirmation(event.target.value)}
