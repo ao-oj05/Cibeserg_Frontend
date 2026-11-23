@@ -48,6 +48,11 @@ export function AuthForm({ mode }: AuthFormProps) {
     setError("");
     setSuccess("");
 
+    if (isRegister && name.trim().length < 2) {
+      setError("Escribe tu nombre (mínimo 2 caracteres).");
+      return;
+    }
+
     if (isRegister && !isValidPassword(password)) {
       setError(
         "Usa entre 8 y 12 caracteres, con mayúscula, minúscula, número y carácter especial.",
@@ -66,7 +71,7 @@ export function AuthForm({ mode }: AuthFormProps) {
         await register({
           email: email.trim(),
           password,
-          ...(name.trim() ? { name: name.trim() } : {}),
+          name: name.trim(),
         });
         setSuccess("Tu cuenta quedó creada. Ya puedes iniciar sesión.");
         setPassword("");
@@ -120,7 +125,7 @@ export function AuthForm({ mode }: AuthFormProps) {
           <form className="auth-form" onSubmit={handleSubmit}>
             {isRegister && (
               <label className="form-field">
-                <span>Nombre <span className="field-optional">(opcional)</span></span>
+                <span>Nombre</span>
                 <input
                   autoComplete="name"
                   maxLength={100}
@@ -128,6 +133,7 @@ export function AuthForm({ mode }: AuthFormProps) {
                   name="name"
                   onChange={(event) => setName(event.target.value)}
                   placeholder="Tu nombre"
+                  required
                   value={name}
                 />
               </label>
