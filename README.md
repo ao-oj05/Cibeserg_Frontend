@@ -34,3 +34,7 @@ npm run build
 - Las solicitudes que modifican datos requieren el origen exacto del frontend y JSON; las respuestas API no se cachean.
 
 Al llamar la API mediante el mismo origen, el navegador no necesita CORS entre Vercel y Render. El backend debe mantener `Secure`, `HttpOnly` y `SameSite=Lax` en la cookie de sesión. El conteo de saltos de proxy confiables para rate limiting por IP debe corresponder a la cadena real Vercel → Render; confirma ese valor en ambos despliegues antes de producción.
+
+## Licencia
+
+Este repositorio se distribuye bajo la Licencia MIT. Consulta el archivo [LICENSE](./LICENSE) para conocer los permisos y condiciones. La licencia cubre el material original de este repositorio; las dependencias y componentes de terceros conservan sus propias licencias.
